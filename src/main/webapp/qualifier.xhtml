@@ -37,14 +37,15 @@
     <br/>
     <br/>
      <h:form>
-        <h:outputLabel value="Name" for="name"/>
-        <h:inputText id="name" value="#{qualifierBean.name}"/>
+         <h2>Dynamic Salutation</h2>
+        <h:outputLabel value="Name" for="dynamic"/>
+        <h:inputText id="dynamic" value="#{qualifierBean.name}"/>
 
-        <h:outputLabel value="#{qualifierBean.soldier}"/> <br/>
+        <h:outputLabel value="#{qualifierBean.message}"/> <br/>
 
 
-          <h:commandButton value="Salute Soldier" >
-            <f:ajax execute="@form" listener="#{qualifierBean.solidierSalutation}"
+          <h:commandButton value="Salute Dynamically" >
+            <f:ajax execute="@form" listener="#{qualifierBean.dynamicSalutation}"
                     render="@form"/>
         </h:commandButton>
     </h:form>

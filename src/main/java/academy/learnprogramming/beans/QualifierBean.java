@@ -5,6 +5,9 @@ import academy.learnprogramming.annotations.Soldier;
 import academy.learnprogramming.annotations.Web;
 import academy.learnprogramming.interfaces.Salute;
 
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Instance;
+import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Inject;
 import java.io.Serializable;
 
@@ -19,15 +22,20 @@ public class QualifierBean implements Serializable {
     @Soldier
     private Salute soldierSalute;
 
+    @Inject
+    @Any
+    private Instance<Salute> dynamicSalute;
+
     private String police;
     private String soldier;
     private String name;
+    private String message;
 
     public void policeSalutation() {
         police = policeSalute.salute(name);
     }
 
-    public void solidierSalutation() {
+    public void soldierSalutation() {
         soldier = soldierSalute.salute(name);
     }
 
@@ -53,5 +61,30 @@ public class QualifierBean implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void dynamicSalutation(){
+        if(name != null && name.length() > 0){
+            if(name.startsWith("p")){
+                Instance<Salute> select = dynamicSalute.select(new AnnotationLiteral<Police>() {
+                });
+                Salute salute = select.get();
+                message = salute.salute(name);
+            }
+            else{
+                Instance<Salute> select = dynamicSalute.select(new AnnotationLiteral<Soldier>() {
+                });
+                Salute salute = select.get();
+                message = salute.salute(name);
+            }
+        }
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

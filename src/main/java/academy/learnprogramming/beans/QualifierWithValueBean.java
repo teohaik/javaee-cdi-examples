@@ -11,11 +11,11 @@ import java.io.Serializable;
 public class QualifierWithValueBean implements Serializable {
 
     @Inject
-    @ServiceMan(value = ServiceMan.ServiceType.POLICE)
+    @ServiceMan(value = "P")
     private Salute policeSalute;
 
     @Inject
-    @ServiceMan(value = ServiceMan.ServiceType.SOLDIER)
+    @ServiceMan(value = "S")
     private Salute soldierSalute;
 
     private String police;

@@ -11,9 +11,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD, ElementType.TYPE, ElementType.METHOD})
 public @interface ServiceMan {
 
-    ServiceType value();
-
-    public enum ServiceType{
-        SOLDIER, POLICE
-    }
+    String value();
 }

@@ -7,13 +7,13 @@ import javax.ejb.Stateless;
 import java.text.MessageFormat;
 
 @Stateless
-@ServiceMan(value = ServiceMan.ServiceType.SOLDIER)
+@ServiceMan(value = "S")
 @academy.learnprogramming.annotations.Soldier
 public class Soldier implements Salute {
 
     @Override
     public String salute(String name) {
-        return MessageFormat.format("Aye Aye Capt {0}", name);
+        return "Soldier bean injected. param = "+name;
     }
 
 }

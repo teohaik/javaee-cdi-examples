@@ -1,8 +1,6 @@
 package academy.learnprogramming.beans;
 
-import academy.learnprogramming.annotations.Police;
-import academy.learnprogramming.annotations.Soldier;
-import academy.learnprogramming.annotations.Web;
+import academy.learnprogramming.annotations.*;
 import academy.learnprogramming.interfaces.Salute;
 
 import javax.enterprise.inject.Any;
@@ -64,19 +62,16 @@ public class QualifierBean implements Serializable {
     }
 
     public void dynamicSalutation(){
-        if(name != null && name.length() > 0){
-            if(name.startsWith("p")){
-                Instance<Salute> select = dynamicSalute.select(new AnnotationLiteral<Police>() {
-                });
-                Salute salute = select.get();
-                message = salute.salute(name);
+        if(name != null && name.length() == 1){
+            Instance<Salute> selectInstance = dynamicSalute.select(new NamedLiteral(name));
+            Salute salutationService;
+            if (!selectInstance.isUnsatisfied()) {
+                salutationService =  selectInstance.get();
+            } else {
+                System.out.println("Defaulting to Soldier Salutation Service...");
+                salutationService = dynamicSalute.select(new AnnotationLiteral<Soldier>() {}).get();
             }
-            else{
-                Instance<Salute> select = dynamicSalute.select(new AnnotationLiteral<Soldier>() {
-                });
-                Salute salute = select.get();
-                message = salute.salute(name);
-            }
+            message = salutationService.salute(name);
         }
     }
 

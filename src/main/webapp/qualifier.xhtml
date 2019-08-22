@@ -38,8 +38,10 @@
     <br/>
      <h:form>
          <h2>Dynamic Salutation</h2>
-         <p>If the name starts with letter p, then the Police salutation bean is injected dynamically. Otherwise, the Soldier salutation bean is injected</p>
-        <h:outputLabel value="Name" for="dynamic"/>
+         <p>If the name = P, then the Police salutation bean is injected dynamically</p>
+         <p>If the name = S, the Soldier salutation bean is injected</p>
+
+         <h:outputLabel value="Name" for="dynamic"/>
         <h:inputText id="dynamic" value="#{qualifierBean.name}"/>
 
         <h:outputLabel value="#{qualifierBean.message}"/> <br/>
